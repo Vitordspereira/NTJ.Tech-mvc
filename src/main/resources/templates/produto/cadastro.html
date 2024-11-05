@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Cadastro de Produto</h1>
+    <div th:if="${not #strings.isEmpty(msg)}" class="alert alert-success">
+        <span th:text="${msg}"></span>
+    </div>
+    <form th:action="@{/produto/cadastrar}" method="post" th:object="${produto}">
+        <div class="mb-3">
+            <label class="form-label">Nome do Produto:</label>
+            <input type="text" th:field="*{produto}" class="form-control" required>
+            <p th:if="${#fields.hasErrors('produto')}" class="text text-danger"
+               th:errors="*{produto}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Marca:</label>
+            <select th:field="*{marca}" class="form-control" required>
+                <option value="" disabled selected>Selecione a Marca</option>
+                <option value="ZARA">ZARA</option>
+                <option value="RIACHUELO">RIACHUELO</option>
+            </select>
+            <p th:if="${#fields.hasErrors('marca')}" class="text text-danger"
+               th:errors="*{marca}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cor:</label>
+            <select th:field="*{cor}" class="form-control" required>
+                <option value="" disabled selected>Selecione a Cor</option>
+                <option value="BRANCO">BRANCO</option>
+                <option value="PRETO">PRETO</option>
+            </select>
+            <p th:if="${#fields.hasErrors('cor')}" class="text text-danger"
+               th:errors="*{cor}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tecido:</label>
+            <select th:field="*{tecido}" class="form-control" required>
+                <option value="" disabled selected>Selecione o Tecido</option>
+                <option value="ALGODÃO">ALGODÃO</option>
+                <option value="POLIESTER">POLIESTER</option>
+            </select>
+            <p th:if="${#fields.hasErrors('tecido')}" class="text text-danger"
+               th:errors="*{tecido}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Tamanho:</label>
+            <select th:field="*{tamanho}" class="form-control" required>
+                <option value="" disabled selected>Selecione o Tamanho</option>
+                <option value="P">P</option>
+                <option value="M">M</option>
+                <option value="G">G</option>
+            </select>
+            <p th:if="${#fields.hasErrors('tamanho')}" class="text text-danger"
+               th:errors="*{tamanho}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Status:</label>
+            <select th:field="*{status}" class="form-control" required>
+                <option value="" disabled selected>Selecione retirada ou entrega</option>
+                <option value="RETIRADA">RETIRADA</option>
+                <option value="ENTREGA">ENTREGA</option>
+            </select>
+            <p th:if="${#fields.hasErrors('status')}" class="text text-danger"
+               th:errors="*{status}"></p>
+        </div>
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+    </form>
+</div>
+<script src="https://unpkg.com/imask"></script>
+<script>
+    // Adicione qualquer máscara de entrada aqui, se necessário
+</script>
+</body>
+</html>
+
+

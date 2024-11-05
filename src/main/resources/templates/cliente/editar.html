@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente</title>
+</head>
+<body>
+<div class="container" layout:fragment="conteudo">
+    <h1>Edição de Clientes</h1>
+    <form th:action="@{/cliente/editar}" method="post" th:object="${cliente}">
+        <input type="hidden" th:field="*{id}">
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nome</label>
+            <input type="text" th:field="*{nome}" class="form-control">
+            <p th:if="${#fields.hasErrors('nome')}" class="text text-danger"
+               th:errors="*{nome}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" th:field="*{email}" class="form-control">
+            <p th:if="${#fields.hasErrors('email')}" class="text text-danger"
+               th:errors="*{email}"></p>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Telefone</label>
+            <input type="tel" th:field="*{telefone}" class="form-control" placeholder="(XX) XXXXX-XXXX">
+            <p th:if="${#fields.hasErrors('telefone')}" class="text text-danger" th:errors="*{telefone}"></p>
+        </div>
+        <script src="https://unpkg.com/imask"></script>
+        <script>
+            // Aplica a máscara ao campo de telefone
+            document.addEventListener('DOMContentLoaded', function () {
+                var telefoneInput = document.querySelector('input[th\\:field="*{telefone}"]');
+                if (telefoneInput) {
+                    IMask(telefoneInput, {
+                        mask: '(00) 00000-0000'
+                    });
+                }
+            });
+        </script>
+        <button class="btn btn-success">Editar</button>
+    </form>
+</div>
+</body>
+</html>
